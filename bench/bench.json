@@ -1,0 +1,425 @@
+{
+  "base": "http://127.0.0.1:18793",
+  "runs": 3,
+  "started_epoch": 1794156158.482477,
+  "texts": {
+    "short": {
+      "claimed_words": 10,
+      "words": 10,
+      "chars": 54,
+      "text": "The train leaves at seven fifteen and we should hurry."
+    },
+    "medium": {
+      "claimed_words": 50,
+      "words": 50,
+      "chars": 291,
+      "text": "Every autumn the harbour fills with boats from the north. The crews spend the first week repairing nets and arguing about the weather. By the second week the market stalls open at dawn, selling smoked fish, bread and coffee. Crane operators say the season is short, but nobody believes them."
+    },
+    "hundred": {
+      "claimed_words": 100,
+      "words": 93,
+      "chars": 501,
+      "text": "The night shift at the water plant begins with a walk along the filter gallery, where the pumps hum in a rhythm the older operators can read like a clock. If the third pump sounds flat, they say, the intake screen is fouling, and someone has to wade into the cold channel with a rake before the pressure drops far enough to wake the supervisor. On the night the storm hit, the gallery went quiet and the crew stood listening until the backup generator caught and the pumps came back one after another."
+    },
+    "long": {
+      "claimed_words": 200,
+      "words": 202,
+      "chars": 1156,
+      "text": "When the survey team reached the valley, the map they carried showed a lake where they found a dry basin of cracked clay, and the guide explained that the river had changed course three summers earlier after a landslide blocked the narrow pass above the village. Nobody had told the ministry, because the ministry had not asked, and the irrigation permits issued that spring were written for water that no longer existed. The team spent two days measuring the old shoreline, photographing the stumps of trees that had stood underwater for forty years, and interviewing farmers who remembered the lake as children. On the third morning a truck arrived with a portable pump and four engineers who had been sent to drain a marsh that was no longer there, and the guide laughed until he had to sit down on a rock and wipe his eyes twice. By evening the two groups had combined their notes, drawn a new channel on the map, and agreed to send a single honest report instead of the four contradictory ones their offices expected, which the team leader later called the only real achievement of the entire expedition, and the new channel still carries water today."
+    }
+  },
+  "whole": {
+    "short": {
+      "runs": [
+        {
+          "status": 200,
+          "ttfb_s": 0.5951,
+          "wall_s": 0.5952,
+          "bytes": 307244,
+          "audio_s": 3.483,
+          "finish_reason": "stop",
+          "cfg_gamma": "1.5",
+          "md5": "37f7666409da88705e2a67358652cc85",
+          "wav": "/tmp/drama3-bench/take-short-1.wav",
+          "rtf": 5.852
+        },
+        {
+          "status": 200,
+          "ttfb_s": 0.5957,
+          "wall_s": 0.5959,
+          "bytes": 307244,
+          "audio_s": 3.483,
+          "finish_reason": "stop",
+          "cfg_gamma": "1.5",
+          "md5": "37f7666409da88705e2a67358652cc85",
+          "rtf": 5.845
+        },
+        {
+          "status": 200,
+          "ttfb_s": 0.5946,
+          "wall_s": 0.5949,
+          "bytes": 307244,
+          "audio_s": 3.483,
+          "finish_reason": "stop",
+          "cfg_gamma": "1.5",
+          "md5": "37f7666409da88705e2a67358652cc85",
+          "rtf": 5.855
+        }
+      ],
+      "ttfb_s": {
+        "median": 0.5951,
+        "min": 0.5946,
+        "max": 0.5957,
+        "runs": [
+          0.5946,
+          0.5951,
+          0.5957
+        ]
+      },
+      "wall_s": {
+        "median": 0.5952,
+        "min": 0.5949,
+        "max": 0.5959,
+        "runs": [
+          0.5949,
+          0.5952,
+          0.5959
+        ]
+      },
+      "audio_s": {
+        "median": 3.483,
+        "min": 3.483,
+        "max": 3.483,
+        "runs": [
+          3.483,
+          3.483,
+          3.483
+        ]
+      }
+    },
+    "medium": {
+      "runs": [
+        {
+          "status": 200,
+          "ttfb_s": 3.8176,
+          "wall_s": 3.8199,
+          "bytes": 2015276,
+          "audio_s": 22.848,
+          "finish_reason": "stop",
+          "cfg_gamma": "1.5",
+          "md5": "7e70939d98c1717c77c328af265aa27c",
+          "wav": "/tmp/drama3-bench/take-medium-1.wav",
+          "rtf": 5.981
+        },
+        {
+          "status": 200,
+          "ttfb_s": 3.8176,
+          "wall_s": 3.8196,
+          "bytes": 2015276,
+          "audio_s": 22.848,
+          "finish_reason": "stop",
+          "cfg_gamma": "1.5",
+          "md5": "7e70939d98c1717c77c328af265aa27c",
+          "rtf": 5.982
+        },
+        {
+          "status": 200,
+          "ttfb_s": 3.8182,
+          "wall_s": 3.8202,
+          "bytes": 2015276,
+          "audio_s": 22.848,
+          "finish_reason": "stop",
+          "cfg_gamma": "1.5",
+          "md5": "7e70939d98c1717c77c328af265aa27c",
+          "rtf": 5.981
+        }
+      ],
+      "ttfb_s": {
+        "median": 3.8176,
+        "min": 3.8176,
+        "max": 3.8182,
+        "runs": [
+          3.8176,
+          3.8176,
+          3.8182
+        ]
+      },
+      "wall_s": {
+        "median": 3.8199,
+        "min": 3.8196,
+        "max": 3.8202,
+        "runs": [
+          3.8196,
+          3.8199,
+          3.8202
+        ]
+      },
+      "audio_s": {
+        "median": 22.848,
+        "min": 22.848,
+        "max": 22.848,
+        "runs": [
+          22.848,
+          22.848,
+          22.848
+        ]
+      }
+    },
+    "hundred": {
+      "runs": [
+        {
+          "status": 200,
+          "ttfb_s": 4.8135,
+          "wall_s": 4.816,
+          "bytes": 2523180,
+          "audio_s": 28.607,
+          "finish_reason": "stop",
+          "cfg_gamma": "1.5",
+          "md5": "9ad22eb7f87831155ee2645aefd01a59",
+          "wav": "/tmp/drama3-bench/take-hundred-1.wav",
+          "rtf": 5.94
+        },
+        {
+          "status": 200,
+          "ttfb_s": 4.8136,
+          "wall_s": 4.8155,
+          "bytes": 2523180,
+          "audio_s": 28.607,
+          "finish_reason": "stop",
+          "cfg_gamma": "1.5",
+          "md5": "9ad22eb7f87831155ee2645aefd01a59",
+          "rtf": 5.941
+        },
+        {
+          "status": 200,
+          "ttfb_s": 4.8139,
+          "wall_s": 4.8162,
+          "bytes": 2523180,
+          "audio_s": 28.607,
+          "finish_reason": "stop",
+          "cfg_gamma": "1.5",
+          "md5": "9ad22eb7f87831155ee2645aefd01a59",
+          "rtf": 5.94
+        }
+      ],
+      "ttfb_s": {
+        "median": 4.8136,
+        "min": 4.8135,
+        "max": 4.8139,
+        "runs": [
+          4.8135,
+          4.8136,
+          4.8139
+        ]
+      },
+      "wall_s": {
+        "median": 4.816,
+        "min": 4.8155,
+        "max": 4.8162,
+        "runs": [
+          4.8155,
+          4.816,
+          4.8162
+        ]
+      },
+      "audio_s": {
+        "median": 28.607,
+        "min": 28.607,
+        "max": 28.607,
+        "runs": [
+          28.607,
+          28.607,
+          28.607
+        ]
+      }
+    },
+    "long": {
+      "runs": [
+        {
+          "status": 200,
+          "ttfb_s": 8.163,
+          "wall_s": 8.1667,
+          "bytes": 4194348,
+          "audio_s": 47.554,
+          "finish_reason": "length",
+          "cfg_gamma": "1.5",
+          "md5": "ac02351e7617b3ab3032052091509dd4",
+          "wav": "/tmp/drama3-bench/take-long-1.wav",
+          "rtf": 5.823
+        },
+        {
+          "status": 200,
+          "ttfb_s": 8.167,
+          "wall_s": 8.1692,
+          "bytes": 4194348,
+          "audio_s": 47.554,
+          "finish_reason": "length",
+          "cfg_gamma": "1.5",
+          "md5": "ac02351e7617b3ab3032052091509dd4",
+          "rtf": 5.821
+        },
+        {
+          "status": 200,
+          "ttfb_s": 8.1646,
+          "wall_s": 8.1682,
+          "bytes": 4194348,
+          "audio_s": 47.554,
+          "finish_reason": "length",
+          "cfg_gamma": "1.5",
+          "md5": "ac02351e7617b3ab3032052091509dd4",
+          "rtf": 5.822
+        }
+      ],
+      "ttfb_s": {
+        "median": 8.1646,
+        "min": 8.163,
+        "max": 8.167,
+        "runs": [
+          8.163,
+          8.1646,
+          8.167
+        ]
+      },
+      "wall_s": {
+        "median": 8.1682,
+        "min": 8.1667,
+        "max": 8.1692,
+        "runs": [
+          8.1667,
+          8.1682,
+          8.1692
+        ]
+      },
+      "audio_s": {
+        "median": 47.554,
+        "min": 47.554,
+        "max": 47.554,
+        "runs": [
+          47.554,
+          47.554,
+          47.554
+        ]
+      }
+    }
+  },
+  "stream": {
+    "short": {
+      "status": 200,
+      "content_type": "audio/pcm",
+      "transfer_encoding": "chunked",
+      "first_chunk_s": 0.0644,
+      "first_chunk_bytes": 8192,
+      "blocks": 38,
+      "bytes": 307200,
+      "audio_s": 3.483,
+      "wall_s": 0.6574,
+      "gaps_s": [
+        0.0,
+        0.0332,
+        0.0,
+        0.0332,
+        0.0,
+        0.0332,
+        0.0,
+        0.0332
+      ],
+      "md5": "0a6ff681ece0ad632132178d5cb01955",
+      "rtf": 5.298
+    },
+    "medium": {
+      "status": 200,
+      "content_type": "audio/pcm",
+      "transfer_encoding": "chunked",
+      "first_chunk_s": 0.072,
+      "first_chunk_bytes": 8192,
+      "blocks": 246,
+      "bytes": 2015232,
+      "audio_s": 22.848,
+      "wall_s": 4.2253,
+      "gaps_s": [
+        0.0,
+        0.0333,
+        0.0,
+        0.0332,
+        0.0,
+        0.0333,
+        0.0,
+        0.0333
+      ],
+      "md5": "4bdbbaf71a0cacb5a0a09463781af4f5",
+      "rtf": 5.407,
+      "matches_wav_payload": true,
+      "pcm_md5": "4bdbbaf71a0cacb5a0a09463781af4f5"
+    },
+    "hundred": {
+      "status": 200,
+      "content_type": "audio/pcm",
+      "transfer_encoding": "chunked",
+      "first_chunk_s": 0.0795,
+      "first_chunk_bytes": 8192,
+      "blocks": 308,
+      "bytes": 2523136,
+      "audio_s": 28.607,
+      "wall_s": 5.3256,
+      "gaps_s": [
+        0.0,
+        0.0331,
+        0.0,
+        0.0333,
+        0.0001,
+        0.0333,
+        0.0,
+        0.0334
+      ],
+      "md5": "b1f435e6df058da8c350582590086b58",
+      "rtf": 5.372,
+      "matches_wav_payload": true,
+      "pcm_md5": "b1f435e6df058da8c350582590086b58"
+    },
+    "long": {
+      "status": 200,
+      "content_type": "audio/pcm",
+      "transfer_encoding": "chunked",
+      "first_chunk_s": 0.1134,
+      "first_chunk_bytes": 8192,
+      "blocks": 512,
+      "bytes": 4194304,
+      "audio_s": 47.554,
+      "wall_s": 9.0137,
+      "gaps_s": [
+        0.0,
+        0.0335,
+        0.0,
+        0.0334,
+        0.0,
+        0.0336,
+        0.0,
+        0.0335
+      ],
+      "md5": "6af158904a68bbf1a58844c1598427fd",
+      "rtf": 5.276,
+      "matches_wav_payload": true,
+      "pcm_md5": "6af158904a68bbf1a58844c1598427fd"
+    }
+  },
+  "speakers": {
+    "tagged": {
+      "wall_s": 2.5602,
+      "audio_s": 15.325,
+      "md5": "b4e96bf18ce5ec0b0c525c502897215c",
+      "finish_reason": "stop"
+    },
+    "control_all_speaker_0": {
+      "wall_s": 2.2254,
+      "audio_s": 12.725,
+      "md5": "a193f5c5d5d94ad20d293ddfd7e8f564",
+      "finish_reason": "silence"
+    },
+    "identical_audio": false,
+    "out_of_range_tag": {
+      "status": 400,
+      "body": "{\"error\": {\"message\": \"Drama 3 request: input: speaker tags must be written <|speaker:N|> with N in 0..15 and no leading zero; got '<|speaker:99|> out of range'\", \"type\": \"invalid_request_error\"}}"
+    }
+  },
+  "finished_epoch": 1794156235.9997103
+}

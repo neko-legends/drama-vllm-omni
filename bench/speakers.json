@@ -1,0 +1,70 @@
+{
+  "line": "Good evening, the harbour lights are coming on.",
+  "turns": "<|speaker:0|> You said the shipment left on Tuesday morning. <|speaker:1|> It did, but the port held it for inspection. <|speaker:0|> Then why is it still standing in the yard? <|speaker:1|> Because that is exactly where the inspectors put it.",
+  "takes": {
+    "speaker0": {
+      "wav": "/tmp/drama3-speakers/take-speaker0.wav",
+      "bytes": 208940,
+      "audio_s": 2.368,
+      "md5": "58eec879ee3b9f67a5b9f63924ecd9f3",
+      "f0_median_hz": 162.7,
+      "voiced_frames": 88
+    },
+    "speaker1": {
+      "wav": "/tmp/drama3-speakers/take-speaker1.wav",
+      "bytes": 176172,
+      "audio_s": 1.997,
+      "md5": "d7cf557dc266e51d6070045c953e0e90",
+      "f0_median_hz": 101.4,
+      "voiced_frames": 77
+    },
+    "speaker0_repeat": {
+      "wav": "/tmp/drama3-speakers/take-speaker0_repeat.wav",
+      "bytes": 208940,
+      "audio_s": 2.368,
+      "md5": "58eec879ee3b9f67a5b9f63924ecd9f3",
+      "f0_median_hz": 162.7,
+      "voiced_frames": 88
+    },
+    "twoturn": {
+      "wav": "/tmp/drama3-speakers/take-twoturn.wav",
+      "bytes": 1351724,
+      "audio_s": 15.325,
+      "md5": "b4e96bf18ce5ec0b0c525c502897215c",
+      "f0_median_hz": 186.5,
+      "voiced_frames": 348
+    }
+  },
+  "two_speaker_turns": [
+    {
+      "turn": 1,
+      "start_s": 0.07,
+      "end_s": 2.36,
+      "f0_median_hz": 110.4,
+      "voiced_frames": 70
+    },
+    {
+      "turn": 2,
+      "start_s": 3.62,
+      "end_s": 6.77,
+      "f0_median_hz": 253.4,
+      "voiced_frames": 87
+    },
+    {
+      "turn": 3,
+      "start_s": 8.02,
+      "end_s": 10.14,
+      "f0_median_hz": 119.0,
+      "voiced_frames": 72
+    },
+    {
+      "turn": 4,
+      "start_s": 11.47,
+      "end_s": 14.95,
+      "f0_median_hz": 247.8,
+      "voiced_frames": 117
+    }
+  ],
+  "speaker0_and_speaker1_differ": true,
+  "speaker0_repeat_is_deterministic": true
+}
