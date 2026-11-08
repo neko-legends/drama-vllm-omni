@@ -81,8 +81,8 @@ scheduling noise, not sampling variance. WAV md5 per row:
 **The 202-word row is capped, not complete.** The engine answers at most 1024 frames of
 2048 samples = **47.554 s** per request, so a 202-word text comes back clipped with
 `X-Finish-Reason: length` (the log line says `finish=length`). Its 5.82× is sustained
-generation throughput; the full text was never spoken. At this voice's pace (~0.23 s of audio
-per word here) the cap lands at roughly 100–200 words, so the 93-word row is the largest
+generation throughput; the full text was never spoken. At this voice's pace (0.31–0.46 s of
+audio per word in these samples) the cap lands at roughly 100–150 words, so the 93-word row is the largest
 complete reply measured end to end. Longer texts must be split client-side (or the cap raised
 with `--max-frames`, which was not used for these numbers).
 
