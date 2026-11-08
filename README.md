@@ -35,3 +35,18 @@ Measured on one RTX 5090 (sm_120) with TensorFold's native NVFP4 engine:
   [`docs/BENCH-R9700.md`](docs/BENCH-R9700.md).
 
 ![Drama 3 throughput and first-audio latency on an RTX 5090 and a Radeon R9700](docs/images/drama-5090-vs-r9700-20261108.png)
+
+## The desktop toggle (Omarchy) and eva-core status
+
+The bar widget lives in **eva-core**, not here, so it survives machine changes:
+[`eva-core/integrations/omarchy-voice/`](https://github.com/flashosophy/eva-core/tree/master/integrations/omarchy-voice).
+On a fresh Omarchy machine:
+
+```bash
+git clone https://github.com/flashosophy/eva-core && cd eva-core
+integrations/omarchy-voice/install.sh     # idempotent; installs the quickshell plugin + a 15 s status reporter
+```
+
+It toggles the engine through this repo's `scripts/drama3-service.sh` (one owner for the GPU lock), and reports
+state to eva-core at `POST /api/voice/engine-status`, which is what tells Eva whether she may speak with the local
+voice right now (`speakable`).
