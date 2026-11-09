@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# drama3-service.sh — start|stop|status|restart the Drama 3 NVFP4 engine on ripper.
+# drama3-service.sh — start|stop|status|restart the Drama 3 NVFP4 engine on this host.
 #
 # Safe for a UI toggle: every verb is idempotent, `start` refuses to touch a port
 # that someone else already answers on, `stop` only stops the transient user unit
@@ -20,7 +20,7 @@
 # DRAMA3_MEMORY_MAX_BYTES, DRAMA3_READY_TIMEOUT, DRAMA3_GPU.
 set -uo pipefail
 
-ROOT=${DRAMA3_ROOT:-/home/jun/drama3}
+ROOT=${DRAMA3_ROOT:-$HOME/drama3}
 SRC=$ROOT/recipe-src
 BIN=${DRAMA3_BIN:-$SRC/build/tensorfold-nvfp4/zig-out/native/bin/tensorfold-native}
 CKPT=${DRAMA3_CHECKPOINT:-$SRC/drama-3-NVFP4-Pruned}

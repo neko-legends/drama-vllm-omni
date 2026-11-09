@@ -1,17 +1,17 @@
-# Installing Drama 3 (TensorFold native NVFP4) on a fresh Omarchy box
+# Installing Drama 3 (TensorFold native NVFP4) on a CUDA desktop
 
-This is the build that was measured on `ripper` — see [`BENCH-5090.md`](BENCH-5090.md) for the
+This is the build that was measured on the test host — see [`BENCH-5090.md`](BENCH-5090.md) for the
 numbers. Everything below was executed on that machine on **2026-11-08**; the versions and
 paths are the ones in use, not a guess. End state: one RTX 5090 serving
 `POST /v1/audio/speech` with model id `fishaudio/drama-3` on `127.0.0.1:18793`,
 **20.5 GiB VRAM**, ~5.8× real time, ready in ~10 s after start.
 
-Target: Omarchy (Arch) on a single **RTX 5090** (sm_120), CUDA 13, user systemd. The host
+Target: an Arch-based Linux desktop with a single **RTX 5090** (sm_120), CUDA 13, user systemd. The host
 also has an RTX 3090 installed; it is excluded with `CUDA_VISIBLE_DEVICES=0` (see gotcha 11).
 
 ## 1. Packages (exact pacman names)
 
-Versions as installed on `ripper`:
+Versions as installed on the test host:
 
 ```sh
 sudo pacman -S --needed \
@@ -25,9 +25,9 @@ sudo pacman -S --needed \
   ffmpeg                  # 2:9.0.2-2 -> ffprobe/ffmpeg, only to inspect and resize the WAVs
 ```
 
-NVIDIA userspace is already on an Omarchy desktop; the versions used here were
+NVIDIA userspace is already on an an Arch-based desktop desktop; the versions used here were
 `nvidia-open-dkms 615.78.08-1`, `nvidia-utils 615.78.08-1`, `lib32-nvidia-utils 615.78.08-1`.
-`nvidia-smi` must report the 5090 as compute capability sm_120. Kernel: `7.2.15-1-omarchy`.
+`nvidia-smi` must report the 5090 as compute capability sm_120. Kernel used: a 7.2 series distro kernel (example: `7.2.15-1-omarchy`).
 
 Sizes and headroom, from the launcher's guard table:
 
@@ -43,7 +43,7 @@ Sizes and headroom, from the launcher's guard table:
 ## 2. Get the recipe and build the engine
 
 ```sh
-mkdir -p /home/jun/drama3 && cd /home/jun/drama3
+mkdir -p $HOME/drama3 && cd $HOME/drama3
 git clone https://github.com/plotarmordev/drama-tensorfold.git recipe-src
 cd recipe-src
 git checkout f3b1270            # the checkout these numbers came from
@@ -71,7 +71,7 @@ engine (nvfp4 weights): b1f4b9b4830c9bd43bf7c432cffe7dea21313537 + 4 patches = d
 ```
 
 The build compiles ~40 CUDA fatbins with `-gencode` for sm_86 / sm_120 / sm_121; both
-successful builds on this box are in `/home/jun/drama3/logs/build-engine.log` and
+successful builds on this box are in `$HOME/drama3/logs/build-engine.log` and
 `build-sm120.log` (the second run is fully cached: `options cached`, `(reused)`). Ignore the
 two nvcc warnings about unused `SMEM_MAX` / `RW` constants — they are in the pinned upstream.
 
@@ -86,7 +86,7 @@ License 1.0 — read `drama-3-NVFP4-Pruned/LICENSE` before serving anyone but yo
 `recipe/pilot.py` downloads it on first start:
 
 ```sh
-cd /home/jun/drama3/recipe-src
+cd $HOME/drama3/recipe-src
 python3 recipe/pilot.py --weights nvfp4 \
   --runtime-dir "$PWD/runtime" --gpu-lock /tmp/gpu.lock \
   --evidence-dir runs/pilot-02 --reserve-gib 8
@@ -100,7 +100,7 @@ requests to the HF Hub` — harmless; set `HF_TOKEN` if you hit rate limits.
 Manual equivalent (if you do not want the launcher):
 
 ```sh
-cd /home/jun/drama3/recipe-src
+cd $HOME/drama3/recipe-src
 hf download plotarmordev/drama-3-NVFP4-Pruned \
   --revision 494db08481db952f834b2241bce63fb3dfa72554 \
   --local-dir drama-3-NVFP4-Pruned
@@ -151,11 +151,11 @@ Copy it to the box and use it as the only start/stop path (it is idempotent, so 
 can call it blindly):
 
 ```sh
-install -m 755 scripts/drama3-service.sh /home/jun/drama3/scripts/drama3-service.sh
-/home/jun/drama3/scripts/drama3-service.sh start     # exit 0; refuses (2) if :18793 already answers
-/home/jun/drama3/scripts/drama3-service.sh status    # exit 0 answering, 1 not, 2 foreign server
-/home/jun/drama3/scripts/drama3-service.sh restart
-/home/jun/drama3/scripts/drama3-service.sh stop      # exit 0; refuses (2) if the server is not ours
+install -m 755 scripts/drama3-service.sh $HOME/drama3/scripts/drama3-service.sh
+$HOME/drama3/scripts/drama3-service.sh start     # exit 0; refuses (2) if :18793 already answers
+$HOME/drama3/scripts/drama3-service.sh status    # exit 0 answering, 1 not, 2 foreign server
+$HOME/drama3/scripts/drama3-service.sh restart
+$HOME/drama3/scripts/drama3-service.sh stop      # exit 0; refuses (2) if the server is not ours
 ```
 
 It starts a transient user unit `drama3-service.service` whose PID holds
@@ -184,7 +184,7 @@ speaker-tag proof: `scripts/check-speaker-tags.py`.
 
 ## 7. Gotchas — each one hit on this box
 
-1. **`nvcc` is not on PATH.** `which nvcc` fails on Omarchy; the Arch `cuda` package installs
+1. **`nvcc` is not on PATH.** `which nvcc` fails on an Arch-based desktop; the Arch `cuda` package installs
    to `/opt/cuda/bin`. Pass `NVCC=/opt/cuda/bin/nvcc` to `build-engine.sh` (or prepend
    `/opt/cuda/bin` to PATH). The launcher's `PATH=/usr/local/cuda/bin:...` is a leftover and
    matches nothing.
@@ -242,7 +242,7 @@ speaker-tag proof: `scripts/check-speaker-tags.py`.
     use a speaker-1-only request to judge levels; normalise in the player or supply a reference
     voice.
 
-11. **Two GPUs: pin the 5090.** `ripper` also has a 3090, which is *not* used
+11. **Two GPUs: pin the 5090.** the test host also has a 3090, which is *not* used
     (`CUDA_VISIBLE_DEVICES=0`, engine reports `CUDA sm_120 device 0 ... RTX 5090`). The binary
     carries sm_86/sm_120/sm_121 fatbins, so without the pin it would start on the 3090 too —
     slower, with a third of the VRAM, and the timings in `BENCH-5090.md` would not apply.
@@ -285,7 +285,7 @@ speaker-tag proof: `scripts/check-speaker-tags.py`.
 ## 8. Teardown
 
 ```sh
-/home/jun/drama3/scripts/drama3-service.sh stop
+$HOME/drama3/scripts/drama3-service.sh stop
 # remove the engine + weights (21 GB)
-rm -rf /home/jun/drama3/recipe-src/drama-3-NVFP4-Pruned /home/jun/drama3/recipe-src/build/tensorfold-nvfp4
+rm -rf $HOME/drama3/recipe-src/drama-3-NVFP4-Pruned $HOME/drama3/recipe-src/build/tensorfold-nvfp4
 ```

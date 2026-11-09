@@ -1,6 +1,6 @@
 # Drama 3 on one RTX 5090 — measured benchmark
 
-All numbers below were produced on **2026-11-08** (Sun, PST / UTC−08:00) on `ripper`,
+All numbers below were produced on **2026-11-08** (Sun, PST / UTC−08:00) on the test host,
 Jun's RTX 5090 box, against a **warm** server that had already answered requests.
 Every row was run **3 times**; median and min are reported. Nothing here is copied from
 another card's results.
@@ -10,10 +10,10 @@ another card's results.
 | GPU | NVIDIA GeForce RTX 5090, 32,607 MiB (GB202, `10de:2b85`), compute capability sm_120 |
 | Driver | 615.78.08 (nvidia-open-dkms), VBIOS 98.02.2E.00.AF |
 | Second GPU | RTX 3090 (idle, not used: 109 MiB) |
-| Host | Omarchy (Arch), kernel 7.2.15-1-omarchy, 503 GiB RAM, user systemd |
+| Host | Arch-based Linux, 503 GiB RAM, user systemd, desktop GPU |
 | Engine | TensorFold native Zig/CUDA NVFP4, `plotarmordev/TensorFold` `b1f4b9b4` + 4 patches = `d6b805a2` |
 | Weights | `plotarmordev/drama-3-NVFP4-Pruned` @ `494db084`, 22,294,649,076 B (20.76 GiB) |
-| Recipe checkout | `plotarmordev/drama-tensorfold` @ `f3b1270` in `/home/jun/drama3/recipe-src` |
+| Recipe checkout | `plotarmordev/drama-tensorfold` @ `f3b1270` in `$HOME/drama3/recipe-src` |
 | Audio | WAV 44.1 kHz, 16-bit, mono (`pcm_s16le`) |
 | Sampling | greedy — the same input returned byte-identical WAVs on all 3 runs |
 | Server warm-up | 2 discarded requests before each table |
@@ -21,8 +21,8 @@ another card's results.
 ## Serve command line (as measured)
 
 ```
-/home/jun/drama3/recipe-src/build/tensorfold-nvfp4/zig-out/native/bin/tensorfold-native \
-  serve /home/jun/drama3/recipe-src/drama-3-NVFP4-Pruned \
+$HOME/drama3/recipe-src/build/tensorfold-nvfp4/zig-out/native/bin/tensorfold-native \
+  serve $HOME/drama3/recipe-src/drama-3-NVFP4-Pruned \
   --host 127.0.0.1 --port 18793 --name fishaudio/drama-3 \
   --context 8192 --parallel 1 --no-drafts --prompt-cache-gib 0 --keep-warm 0 \
   --cfg-gamma 1.5 --cfg-batched
@@ -177,7 +177,7 @@ MemoryCurrent=708919296        # 676 MiB RSS
 
 ## 5. Reproduce — exact commands
 
-Everything ran on `ripper`, against `127.0.0.1:18793`. Whole reply, with the timings the
+Everything ran on the test host, against `127.0.0.1:18793`. Whole reply, with the timings the
 table above reports (`curl`'s `time_starttransfer` is the first response byte):
 
 ```sh
@@ -216,9 +216,9 @@ python3 -c 'import os; print("audio_s", os.path.getsize("stream.pcm")/2/44100)'
 Repeatable harnesses (stdlib only, they start and stop nothing):
 
 ```sh
-scp scripts/bench-drama3.py scripts/check-speaker-tags.py ripper:/tmp/
-ssh ripper 'python3 /tmp/bench-drama3.py --out /tmp/drama3-bench --runs 3'
-ssh ripper 'python3 /tmp/check-speaker-tags.py --out /tmp/drama3-speakers'
+scp scripts/bench-drama3.py scripts/check-speaker-tags.py the test host:/tmp/
+ssh the test host 'python3 /tmp/bench-drama3.py --out /tmp/drama3-bench --runs 3'
+ssh the test host 'python3 /tmp/check-speaker-tags.py --out /tmp/drama3-speakers'
 ```
 
 `bench-drama3.py` writes `bench.json` (every run, every md5) plus the takes;
@@ -248,7 +248,7 @@ downsample only changes what is stored here. The original md5s are in `bench/ben
 
 ## 7. Control script — all four verbs tested on this box
 
-`scripts/drama3-service.sh` (also installed at `/home/jun/drama3/scripts/drama3-service.sh`)
+`scripts/drama3-service.sh` (also installed at `$HOME/drama3/scripts/drama3-service.sh`)
 was tested against the running pilot first, then took over the port. Verbatim output:
 
 ```
@@ -285,7 +285,7 @@ exit=1
 
 ### ./drama3-service.sh start
 Running as unit: drama3-service.service; invocation ID: daa57cce414d4d2dac54e9003850a2ed
-drama3-service: started unit drama3-service.service; log /home/jun/drama3/logs/service.log
+drama3-service: started unit drama3-service.service; log $HOME/drama3/logs/service.log
 drama3-service: ready on http://127.0.0.1:18793 after 10s (unit drama3-service.service, pid 257808)
 exit=0
 
@@ -310,7 +310,7 @@ exit=0
 ### ./drama3-service.sh restart
 drama3-service: stopped unit drama3-service.service (pid 257808); http://127.0.0.1:18793 no longer answers
 Running as unit: drama3-service.service; invocation ID: 2b0388cc202145f5967355512b9c5693
-drama3-service: started unit drama3-service.service; log /home/jun/drama3/logs/service.log
+drama3-service: started unit drama3-service.service; log $HOME/drama3/logs/service.log
 drama3-service: ready on http://127.0.0.1:18793 after 10s (unit drama3-service.service, pid 258304)
 exit=0
 

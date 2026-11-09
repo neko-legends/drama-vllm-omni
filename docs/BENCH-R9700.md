@@ -1,6 +1,6 @@
 # Drama 3 on a 32 GB RDNA4 card (gfx1201) — working recipe and measurements
 
-**Date:** 2026-11-08 · **Host:** `eva-core` workstation · **GPU:** AMD Radeon AI PRO R9700, 32 GB, `gfx1201`, ROCm 7.2.5
+**Date:** 2026-11-08 · **Host:** the assistant host workstation · **GPU:** AMD Radeon AI PRO R9700, 32 GB, `gfx1201`, ROCm 7.2.5
 **Runtime:** vLLM 0.33.0 (ROCm wheel, bundled torch 2.13.0+rocm10.0.0) + vLLM-Omni `0.1.dev1+g62876f40a`
 **Weights:** `fishaudio/drama-3-int4` (24.0 GB on disk) — the FP8 checkpoint is 36.9 GiB of stage-0 weights and does **not** fit 32 GB.
 
@@ -15,7 +15,7 @@ running it on a 32 GB RDNA4 Radeon, and the two things that block you are not ob
 
 1. the INT4 checkpoint's zero-points are laid out in a way that trips a **stride assertion** in vLLM's RDNA hybrid
    W4A16 kernel, and
-2. there are **two identical 32 GB cards** on this host, and the first one is already occupied by eva-core's
+2. there are **two identical 32 GB cards** on this host, and the first one is already occupied by the assistant host's
    embedding/rerank/classifier services.
 
 ---
@@ -104,7 +104,7 @@ Raw numbers: `bench/bench-r9700.json`; harness: `scripts/bench-r9700.py`.
   immediately and keep ahead of playback at 1.3–1.9× realtime for anything past a short sentence.
 - **Sustained throughput is ~3.2× lower than the RTX 5090** (5.85–5.98× RTF there, 1.32–1.92× here), so long-form
   narration — a full scene, an audiobook chapter — is the weak case, and multi-character scenes will queue.
-- The card is **not** idle: eva-core's embedding, reranker and clef-flash classifier services hold ~24 GiB of the first
+- The card is **not** idle: the assistant host's embedding, reranker and clef-flash classifier services hold ~24 GiB of the first
   R9700. This recipe therefore needs the *second* card; the two are indistinguishable in `torch.cuda.get_device_name`
   and differ only by PCI address and unique id.
 
